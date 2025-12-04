@@ -1,0 +1,17 @@
+@use "../../styles/mixins" as *;
+
+.navbar {
+  height: calc(100vh - 6.0625rem);
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  padding: 2rem 0;
+  border-right: 1.5px solid var(--grey-mist);
+  background-color: var(--primary-white);
+  grid-column: span 1;
+
+  &__heading {
+    @include heading((s), var(--grey-slate));
+    padding: 0 2rem;
+  }
+}

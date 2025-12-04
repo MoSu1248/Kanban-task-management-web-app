@@ -1,0 +1,45 @@
+:root {
+  /* COLOR Pallete */
+  --primary-blue: #635fc7;
+  --primary-purple: #a8a4ff;
+  --primary-black: #000112;
+
+  --grey-ink: #2b2c37;
+  --grey-charcoal: #20212c;
+  --grey-steel: #3e3f4e;
+  --grey-slate: #828fa3;
+  --grey-mist: #e4ebfa;
+  --grey-cloud: #f4f7fd;
+
+  --primary-white: #ffffff;
+  --primary-red: #ea5555;
+  --primary-salmon: #ff9898;
+
+  /* Typography */
+  --primary-font: "Plus Jakarta Sans", sans-serif;
+
+  --primary-size-xl: 1.5rem;
+  --primary-size-l: 1.125rem;
+  --primary-size-m: 0.9375rem;
+  --primary-size-s: 0.75rem;
+  --primary-size-body-l: 0.8125rem;
+  --primary-size-body-m: 0.75rem;
+
+  --primary-lheight-xl: 1.25;
+  --primary-lheight-l: 1.28;
+  --primary-lheight-m: 1.25;
+  --primary-lheight-s: 1.2;
+  --primary-lheight-body-l: 1.4;
+  --primary-lheight-body-m: 1.25;
+
+  --primary-letterspacing: 2.4px;
+
+  --primary-weight-bold: 700;
+  --primary-weight-medium: 500;
+}
+
+/* SCSS VARIABLES  */
+/* Breakpoints */
+$bp-mobile: 40.625em; // 600px
+$bp-tablet: 56.25em; // 900px
+$bp-desktop: 75em; // 1200px

@@ -1,0 +1,16 @@
+@use "../../styles/mixins" as *;
+
+.nav__toggle {
+  padding: 0rem 2rem;
+  &-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  &-text {
+    @include heading((m), var(--grey-slate));
+  }
+}

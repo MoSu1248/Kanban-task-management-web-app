@@ -1,0 +1,43 @@
+@use "./variables" as vars;
+
+/* Mixin Styling */
+
+@mixin for-desktop-up {
+  @media (max-width: vars.$bp-desktop) {
+    @content;
+  }
+}
+
+@mixin for-tablet-up {
+  @media (max-width: vars.$bp-tablet) {
+    @content;
+  }
+}
+
+@mixin for-mobile-up {
+  @media (max-width: vars.$bp-mobile) {
+    @content;
+  }
+}
+
+/*Typography*/
+
+@mixin heading($size, $color: var(--primary-white)) {
+  color: $color;
+  font-weight: var(--primary-weight-bold);
+  font-size: var(--primary-size-#{$size});
+  line-height: var(--primary-lheight-#{$size});
+  font-family: var(--primary-font);
+}
+
+/*Buttons*/
+
+@mixin add_btn() {
+  @include heading((m));
+  padding: 0.8rem 1.5rem;
+  border-radius: 50rem;
+  border: none;
+  font-family: var(--primary-font);
+  background-color: var(--primary-blue);
+  cursor: pointer;
+}
