@@ -53,6 +53,25 @@
     align-items: center;
     padding: 1rem 0;
 
+    // Scrollbar scoped to THIS element
+    &::-webkit-scrollbar {
+      width: 8px;
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(41, 40, 40, 0.15);
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--grey-slate);
+    }
+
     li {
       background-color: var(--primary-white);
       padding: 1.5rem;

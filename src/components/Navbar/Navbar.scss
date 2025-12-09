@@ -9,6 +9,13 @@
   background-color: var(--primary-white);
   grid-column: span 1;
   height: calc(100vh - 6.0625rem);
+  transition: 0.8s ease;
+
+  &__hidden {
+    opacity: 0.5;
+    transform: translateX(-20rem);
+    transition: 0.8s ease;
+  }
 
   &__heading {
     @include heading((s), var(--grey-slate));

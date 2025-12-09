@@ -14,3 +14,19 @@
     @include heading((m), var(--grey-slate));
   }
 }
+
+.nav-toggle-show {
+  background-color: var(--primary-blue);
+  border: none;
+  padding: 1.2rem;
+  position: absolute;
+  border-top-right-radius: 20rem;
+  border-bottom-right-radius: 20rem;
+  bottom: 3%;
+  transition: 0.4s ease-out;
+  cursor: pointer;
+
+  &-hide {
+    transform: translate(-100%);
+  }
+}
