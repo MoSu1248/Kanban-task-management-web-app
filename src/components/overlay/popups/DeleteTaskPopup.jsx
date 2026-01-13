@@ -1,7 +1,17 @@
-import React from 'react'
+import React from "react";
 
 export default function DeleteTaskPopup() {
   return (
-    <div>DeleteTaskPopup</div>
-  )
+    <form className="overlay__container">
+      <h3 className="overlay__delete-header">Delete this task?</h3>
+      <p className="overlay__delete-text">
+        Are you sure you want to delete the ‘Build settings UI’ task and its
+        subtasks? This action cannot be reversed.
+      </p>
+      <div className="overlay__delete-btns">
+        <button className="overlay__button-delete">Delete</button>
+        <button className="overlay__button-cancel">Cancel</button>
+      </div>
+    </form>
+  );
 }

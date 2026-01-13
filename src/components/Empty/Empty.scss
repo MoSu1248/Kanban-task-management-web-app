@@ -13,6 +13,6 @@
   }
 
   &__btn {
-    @include add_btn();
+    @include btn-styling(var(--primary-white), var(--primary-blue-dim));
   }
 }

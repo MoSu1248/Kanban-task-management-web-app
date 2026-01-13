@@ -32,14 +32,28 @@
 
 /*Buttons*/
 
-@mixin add_btn() {
+@mixin btn-styling($color, $bgColor) {
   @include heading((m));
   padding: 0.8rem 1.5rem;
   border-radius: 50rem;
   border: none;
   font-family: var(--primary-font);
-  background-color: var(--primary-blue);
+  color: $color;
+  background-color: $bgColor;
   cursor: pointer;
+  height: 2.5rem;
+}
+
+@mixin add_coloumn-btn($color, $bgColor) {
+  @include heading((m));
+  padding: 0.8rem 1.5rem;
+  border-radius: 50rem;
+  border: none;
+  font-family: var(--primary-font);
+  background-color: var(--primary-blue-dim);
+  cursor: pointer;
+  height: 2.5rem;
+  color: var(--primary-blue);
 }
 
 @mixin input-styling {
@@ -48,7 +62,10 @@
   resize: none;
   border-radius: 6px;
   border: 1px solid var(--grey-slate-dim);
+  font-weight: var(--primary-weight-medium);
+
   &::placeholder {
     @include heading((body-l), var(--grey-slate-dim));
+    font-weight: var(--primary-weight-medium);
   }
 }

@@ -12,12 +12,25 @@
   &__container {
     height: fit-content;
     min-width: 480px;
+    max-width: 480px;
     background-color: var(--primary-white);
-    padding: 2rem;
+    padding: 2.5em 2rem;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
+
+    .overlay__input {
+      height: 2.5rem;
+    }
+
+    .overlay__textarea {
+      min-height: 8rem;
+    }
+
+    .overlay__label {
+      @include heading((body-m), var(--grey-slate));
+    }
 
     textarea {
       min-height: 3rem;
@@ -26,6 +39,58 @@
     input,
     textarea {
       @include input-styling;
+    }
+
+    .subTasks {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      .subTask {
+        display: flex;
+        height: 2.5rem;
+        .subTask__input {
+          width: 90%;
+        }
+        .subTask__button {
+          width: 10%;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
+      }
+    }
+    .overlay__button {
+      @include btn-styling(var(--primary-white), var(--primary-blue-dim));
+    }
+    .overlay__button-column {
+      @include btn-styling(var(--primary-blue), var(--primary-blue-dim));
+    }
+
+    .overlay__delete-header {
+      @include heading((l), var(--primary-red));
+      font-weight: var(--primary-weight-bold);
+    }
+
+    .overlay__delete-text {
+      @include heading((body-l), var(--grey-slate));
+      font-weight: var(--primary-weight-medium);
+      margin: 0.4rem 0;
+      line-height: var(--primary-lheight-body-l);
+    }
+
+    .overlay__delete-btns {
+      display: flex;
+      gap: 1rem;
+      .overlay__button-delete {
+        @include btn-styling(var(--primary-white), var(--primary-red));
+        width: 50%;
+        height: 2.5rem;
+      }
+      .overlay__button-cancel {
+        @include btn-styling(var(--primary-blue), var(--primary-blue-dim));
+        width: 50%;
+        height: 2.5rem;
+      }
     }
   }
 }
