@@ -3,8 +3,11 @@ import "./Header.scss";
 import Logo_light from "../../assets/logo-dark.svg?react";
 import Elipsis from "../../assets/icon-vertical-ellipsis.svg?react";
 import * as motion from "motion/react-client";
+import { useModalStore } from "../stores/useModalStore";
 
 export default function Header() {
+  const modalOpen = useModalStore((state) => state.toggleModalOpen);
+
   return (
     <motion.div
       className="header"
@@ -17,7 +20,12 @@ export default function Header() {
       </div>
       <div className="content__container">
         <h1 className="content__heading">Platform Launch</h1>
-        <button className="content__add-btn">+ Add New Task</button>
+        <button
+          className="content__add-btn"
+          onClick={() => modalOpen("ADD__TASK")}
+        >
+          + Add New Task
+        </button>
         <Elipsis />
       </div>
     </motion.div>

@@ -16,7 +16,7 @@ export default function AddBoardPopup() {
         className="overlay__input"
       />
       <label className="overlay__label" htmlFor="subTasks">
-        Coloumns
+        Columns
       </label>
       <ul className="subTasks">
         <li className="subTask">
@@ -46,8 +46,8 @@ export default function AddBoardPopup() {
           </button>
         </li>
       </ul>
-      <button className="overlay__button-coloumn">+ Add New Column</button>
-      <button className="overlay__button">Create Task</button>
+      <button className="overlay__button-column">+ Add New Column</button>
+      <button className="overlay__button">Create New Board</button>
     </form>
   );
 }

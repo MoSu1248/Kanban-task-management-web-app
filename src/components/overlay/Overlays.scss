@@ -8,17 +8,59 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
+
+  &__wrapper {
+    background-color: var(--primary-white);
+    border-radius: 6px;
+    padding: 2.5em 2rem;
+    position: relative;
+
+    .close-btn {
+      position: absolute;
+      top: 0rem;
+      right: 0rem;
+      border: none;
+      cursor: pointer;
+      border-top-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      width: 2rem;
+      height: 2rem;
+      background-color: var(--primary-blue);
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+      svg {
+        color: white;
+      }
+      transition: 0.3s ease;
+
+      &:hover {
+        background-color: var(--primary-purple);
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+    }
+  }
+
+  .overlay__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .overlay__options {
+      width: 10%;
+      background: transparent;
+      border: none;
+    }
+  }
 
   &__container {
     height: fit-content;
-    min-width: 480px;
-    max-width: 480px;
-    background-color: var(--primary-white);
-    padding: 2.5em 2rem;
-    border-radius: 6px;
+    min-width: 450px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.5rem;
 
     .overlay__input {
       height: 2.5rem;
@@ -60,7 +102,7 @@
       }
     }
     .overlay__button {
-      @include btn-styling(var(--primary-white), var(--primary-blue-dim));
+      @include btn-styling(var(--primary-white), var(--primary-blue));
     }
     .overlay__button-column {
       @include btn-styling(var(--primary-blue), var(--primary-blue-dim));
