@@ -32,7 +32,7 @@
 
 /*Buttons*/
 
-@mixin btn-styling($color, $bgColor) {
+@mixin btn-styling($color, $bgColor, $hColor) {
   @include heading((m));
   padding: 0.8rem 1.5rem;
   border-radius: 50rem;
@@ -41,7 +41,12 @@
   color: $color;
   background-color: $bgColor;
   cursor: pointer;
-  height: 2.5rem;
+  min-height: 2.5rem;
+  transition: 0.3s ease;
+
+  &:hover {
+    background-color: $hColor;
+  }
 }
 
 @mixin add_coloumn-btn($color, $bgColor) {

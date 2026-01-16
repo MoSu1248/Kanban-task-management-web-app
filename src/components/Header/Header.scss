@@ -33,7 +33,11 @@
     }
 
     .content__add-btn {
-      @include btn-styling(var(--primary-white), var(--primary-blue));
+      @include btn-styling(
+        var(--primary-white),
+        var(--primary-blue),
+        var(--primary-blue-dim)
+      );
       margin-left: auto;
     }
   }

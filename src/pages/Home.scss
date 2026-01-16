@@ -17,7 +17,11 @@
     @include heading((xl), var(--grey-slate));
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.3s ease;
+    &:hover {
+      letter-spacing: 0.3rem;
+      color: var(--primary-white);
+      background-color: var(--grey-slate-dim);
+    }
   }
 }
-
-

@@ -12,6 +12,9 @@
 
   &-text {
     @include heading((m), var(--grey-slate));
+    &:hover {
+      color: var(--primary-blue);
+    }
   }
 }
 
@@ -25,6 +28,11 @@
   bottom: 3%;
   transition: 0.4s ease-out;
   cursor: pointer;
+  width: 4rem;
+
+  &:hover {
+    width: 6rem;
+  }
 
   &-hide {
     transform: translate(-100%);

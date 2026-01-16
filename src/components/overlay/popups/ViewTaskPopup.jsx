@@ -1,60 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
 import Cross from "../../../assets/icon-cross.svg?react";
 import Elipsis from "../../../assets/icon-vertical-ellipsis.svg?react";
 import { useModalStore } from "../../stores/useModalStore";
 import data from "../../../data/data.json";
 
 export default function ViewTaskPopup({ payload }) {
-  const { columnId, taskId } = payload;
+  const { columnId, task } = payload;
 
-  console.log(payload);
+  const [taskState, setTaskState] = useState(task);
 
-  // // Find the board
-  // const board = data.boards.find((b) => b.name === boardId);
+  function toggleSubtask(index) {
+    setTaskState((prev) => {
+      const updated = [...prev.subtasks];
+      updated[index] = {
+        ...updated[index],
+        isCompleted: !updated[index].isCompleted,
+      };
 
-  // // Find the column
-  // const column = board.columns.find((c) => c.name === columnId);
+      return {
+        ...prev,
+        subtasks: updated,
+      };
+    });
+  }
 
-  // // Find the task
-  // const task = column.tasks.find((t) => t.title === taskId);
 
+  const completedCount =
+    taskState.subtasks?.filter((st) => st.isCompleted).length || 0;
+  const totalCount = taskState.subtasks?.length || 0;
   return (
     <form className="overlay__container">
       <div className="overlay__header">
-        <h3>
-          Research pricing points of various competitors and trial different
-          business models
-        </h3>
+        <h3>{taskState.title}</h3>
         <button className="overlay__options">
           <Elipsis />
         </button>
       </div>
-      <label className="overlay__label" htmlFor="addTitle">
-        We know what we're planning to build for version one. Now we need to
-        finalise the first pricing model we'll use. Keep iterating the subtasks
-        until we have a coherent proposition.
+      <label className="overlay__description" htmlFor="addTitle">
+        {taskState.description}
       </label>
       <label className="overlay__label" htmlFor="addTitle">
-        Subtasks (2 of 3)
+        ({completedCount} of {totalCount} subtasks completed )
       </label>
-      <div class="checkbox-container">
-        <input type="checkbox" id="terms" name="terms" value="accepted" />
-        <label for="terms">
-          Research competitor pricing and business models
-        </label>
-      </div>
-      <div class="checkbox-container">
-        <input type="checkbox" id="terms" name="terms" value="accepted" />
-        <label for="terms">
-          Outline a business model that works for our solution
-        </label>
-      </div>
-      <div class="checkbox-container">
-        <input type="checkbox" id="terms" name="terms" value="accepted" />
-        <label for="terms">
-          Talk to potential customers about our proposed solution and ask for
-          fair price expectancy
-        </label>
+      <div className="checkbox__wrapper">
+        {taskState.subtasks.map((subtask, index) => (
+          <div
+            className="checkbox__container"
+            key={index}
+            onClick={() => toggleSubtask(index)}
+          >
+            <input
+              type="checkbox"
+              id="terms"
+              name="terms"
+              value="accepted"
+              onChange={() => toggleSubtask(index)}
+              checked={subtask.isCompleted}
+            />
+            <label
+              htmlFor="terms"
+              className={
+                !subtask.isCompleted
+                  ? "checkbox__label"
+                  : "checkbox__label checked"
+              }
+            >
+              {subtask.title}
+            </label>
+          </div>
+        ))}
       </div>
     </form>
   );

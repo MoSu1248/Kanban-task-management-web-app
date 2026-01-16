@@ -43,7 +43,7 @@ export default function EditBoardPopup({ payload }) {
         </div>
       ))}
       <button className="overlay__button-column">+ Add New Column</button>
-      <button className="overlay__button">Create Task</button>
+      <button className="overlay__button">Save Changes</button>
     </form>
   );
 }

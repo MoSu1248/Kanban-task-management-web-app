@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="column__container">
       {dataList?.columns?.map((column, index) => (
-        <Columns column={column} index={index} />
+        <Columns column={column} key={index} />
       ))}
       <button
         className="column__add-btn"

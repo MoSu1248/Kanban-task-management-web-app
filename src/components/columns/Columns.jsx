@@ -9,7 +9,7 @@ export default function Columns({ column, index }) {
         <div className="column__heading-color"></div>
         {column.name} ({column.tasks.length})
       </h3>
-      <ul key={index}>
+      <ul>
         {column.tasks.map((task, i) => {
           const completedCount =
             task.subtasks?.filter((st) => st.isCompleted).length || 0;
@@ -17,10 +17,10 @@ export default function Columns({ column, index }) {
           return (
             <ColumnCard
               task={task}
-              index={i}
               completedCount={completedCount}
               totalCount={totalCount}
               column={column.name}
+              key={i}
             />
           );
         })}

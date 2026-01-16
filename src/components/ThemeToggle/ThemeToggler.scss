@@ -14,16 +14,16 @@
 
 .toggle-placeholder {
   width: 50px;
-  height: 25px;
-  border-radius: 9999px; /* makes it pill-shaped */
-  background-color: var(--primary-blue); /* gray to show it’s inactive */
+  height: 22px;
+  border-radius: 9999px; 
+  background-color: var(--primary-blue);
   position: relative;
 }
 
 .toggle-placeholder::after {
   content: "";
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   background-color: #fff;
   border-radius: 50%;
   position: absolute;

@@ -13,6 +13,10 @@
   }
 
   &__btn {
-    @include btn-styling(var(--primary-white), var(--primary-blue-dim));
+    @include btn-styling(
+      var(--primary-white),
+      var(--primary-blue),
+      var(--primary-white)
+    );
   }
 }

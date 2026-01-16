@@ -20,6 +20,12 @@
     @include heading((m), var(--grey-slate));
     width: 95%;
     position: relative;
+    transition: 0.3s ease;
+
+    &:hover {
+      letter-spacing: 0.07rem;
+      color: var(--primary-blue);
+    }
 
     &::after {
       content: "";
@@ -38,6 +44,10 @@
   .active {
     @include heading((m), var(--primary-white));
     z-index: 1;
+
+    &:hover {
+      letter-spacing: 0rem;
+    }
   }
 
   .active::after {
@@ -46,5 +56,10 @@
 
   .list__create {
     @include heading((m), var(--primary-blue));
+
+    &:hover {
+      letter-spacing: 0.07rem;
+      color: var(--primary-purple);
+    }
   }
 }
