@@ -9,14 +9,14 @@
   height: 100%;
 
   &__text {
-    @include heading((l), var(--grey-slate));
+    @include heading((l), var(--text-secondary));
   }
 
   &__btn {
     @include btn-styling(
-      var(--primary-white),
-      var(--primary-blue),
-      var(--primary-white)
+      var(--bg-surface),
+      var(--action-primary),
+      var(--bg-surface)
     );
   }
 }

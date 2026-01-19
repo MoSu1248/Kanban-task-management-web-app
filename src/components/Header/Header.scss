@@ -6,7 +6,7 @@
   //   justify-content: space-between;
   align-items: center;
   //   padding: 0 2rem;
-  background-color: var(--primary-white);
+  background-color: var(--bg-surface);
   grid-column: span 2;
 
   .logo__container {
@@ -14,9 +14,9 @@
     height: 100%;
     display: flex;
     align-items: center;
-    border-right: 1.5px solid var(--grey-mist);
+    border-right: 1.5px solid var(--bg-surface-alt);
     padding: 0 2rem;
-    border-bottom: 1.5px solid var(--grey-mist);
+    border-bottom: 1.5px solid var(--bg-surface-alt);
   }
   .content__container {
     display: flex;
@@ -26,17 +26,17 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    border-bottom: 1.5px solid var(--grey-mist);
+    border-bottom: 1.5px solid var(--bg-surface-alt);
 
     .content__heading {
-      @include heading((xl), var(--primary-black));
+      @include heading((xl), var(--text-heading));
     }
 
     .content__add-btn {
       @include btn-styling(
-        var(--primary-white),
-        var(--primary-blue),
-        var(--primary-blue-dim)
+        var(--bg-surface),
+        var(--action-primary),
+        var(--action-primary-muted)
       );
       margin-left: auto;
     }

@@ -55,6 +55,7 @@
   --text-secondary: var(--grey-slate);
   --text-muted: var(--grey-slate-dim);
   --text-inverse: var(--primary-white);
+  --text-heading: var(--primary-black);
 
   /* Borders */
   --border-default: var(--grey-mist);
@@ -64,6 +65,7 @@
   --action-primary: var(--primary-blue);
   --action-primary-hover: var(--primary-purple);
   --action-primary-muted: var(--primary-blue-dim);
+  --action-secondary: var(--button-blue);
 
   /* Danger */
   --action-danger: var(--primary-red);
@@ -85,6 +87,7 @@
   --text-secondary: var(--grey-slate);
   --text-muted: var(--grey-slate-dim);
   --text-inverse: var(--primary-black);
+  --text-heading: var(--primary-white);
 
   /* Borders */
   --border-default: var(--grey-steel);
@@ -94,6 +97,7 @@
   --action-primary: var(--primary-blue);
   --action-primary-hover: var(--primary-purple);
   --action-primary-muted: var(--primary-blue-dim);
+  --action-secondary: var(--button-blue);
 
   /* Danger */
   --action-danger: var(--primary-red);

@@ -12,16 +12,16 @@
 
   .column__add-btn {
     width: 17.5rem;
-    background-color: var(--button-blue);
+    background-color: var(--action-secondary);
     border: none;
-    @include heading((xl), var(--grey-slate));
+    @include heading((xl), var(--text-secondary));
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s ease;
     &:hover {
       letter-spacing: 0.3rem;
-      color: var(--primary-white);
-      background-color: var(--grey-slate-dim);
+      color: var(--bg-surface);
+      background-color: var(--text-muted);
     }
   }
 }

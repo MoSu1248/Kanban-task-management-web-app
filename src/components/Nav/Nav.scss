@@ -17,19 +17,19 @@
     gap: 1rem;
     align-items: center;
     cursor: pointer;
-    @include heading((m), var(--grey-slate));
+    @include heading((m), var(--text-secondary));
     width: 95%;
     position: relative;
     transition: 0.3s ease;
 
     &:hover {
       letter-spacing: 0.07rem;
-      color: var(--primary-blue);
+      color: var(--action-primary);
     }
 
     &::after {
       content: "";
-      background-color: var(--primary-blue);
+      background-color: var(--action-primary);
       border-top-right-radius: 10rem;
       border-bottom-right-radius: 10rem;
       position: absolute;
@@ -42,7 +42,7 @@
     }
   }
   .active {
-    @include heading((m), var(--primary-white));
+    @include heading((m), var(--bg-surface));
     z-index: 1;
 
     &:hover {
@@ -55,11 +55,11 @@
   }
 
   .list__create {
-    @include heading((m), var(--primary-blue));
+    @include heading((m), var(--action-primary));
 
     &:hover {
       letter-spacing: 0.07rem;
-      color: var(--primary-purple);
+      color: var(--action-primary-hover);
     }
   }
 }

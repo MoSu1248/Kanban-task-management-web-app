@@ -11,15 +11,15 @@
   }
 
   &-text {
-    @include heading((m), var(--grey-slate));
+    @include heading((m), var(--text-secondary));
     &:hover {
-      color: var(--primary-blue);
+      color: var(--action-primary);
     }
   }
 }
 
 .nav-toggle-show {
-  background-color: var(--primary-blue);
+  background-color: var(--action-primary);
   border: none;
   padding: 1.2rem;
   position: absolute;
