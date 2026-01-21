@@ -39,8 +39,8 @@ export default function ViewTaskPopup({ payload }) {
       <label className="overlay__description" htmlFor="addTitle">
         {taskState.description}
       </label>
-      <label className="overlay__label" htmlFor="addTitle">
-        ({completedCount} of {totalCount} subtasks completed )
+      <label className="overlay__subtask-count" htmlFor="addTitle">
+        ( {completedCount} of {totalCount} subtasks completed )
       </label>
       <div className="checkbox__wrapper">
         {taskState.subtasks.map((subtask, index) => (

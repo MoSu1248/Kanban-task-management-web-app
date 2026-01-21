@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Cross from "../../../assets/icon-cross.svg?react";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebase";
+import { userBoardStore } from "../../stores/useBoardStore";
+import { useModalStore } from "../../stores/useModalStore";
 
 export default function AddBoardPopup() {
+  const { setSelectedBoardId } = userBoardStore();
+  const closeModal = useModalStore((state) => state.toggleModalClose);
+
+  const [boardName, setBoardName] = useState();
+  async function addBoardWithId(boardName, boardData) {
+    try {
+      const boardRef = doc(db, "Boards", boardName);
+      await setDoc(boardRef, boardData);
+      setSelectedBoardId(boardName);
+      closeModal();
+      console.log("Board created with ID:", boardName);
+    } catch (error) {
+      console.error("Error creating board:", error);
+    }
+  }
+
   return (
-    <form className="overlay__container">
-      <h3>Add New Board</h3>
+    <form className="overlay__container" onSubmit={(e) => e.preventDefault()}>
+      <div className="overlay__header">
+        <h3>Add New Board</h3>
+      </div>
       <label className="overlay__label" htmlFor="addTitle">
         Name
       </label>
@@ -14,40 +36,23 @@ export default function AddBoardPopup() {
         id="addTitle"
         placeholder="e.g. Web Design"
         className="overlay__input"
+        onChange={(e) => setBoardName(e.target.value)}
       />
       <label className="overlay__label" htmlFor="subTasks">
         Columns
       </label>
-      <ul className="subTasks">
-        <li className="subTask">
-          {/* <label className="sr-only" htmlFor="subtask-1"></label> */}
-          <input
-            id="subtask-1"
-            type="text"
-            placeholder="e.g. Make coffee"
-            className="subTask__input"
-            value={"Todo"}
-          />
-          <button type="button" className="subTask__button">
-            <Cross />
-          </button>
-        </li>
-        <li className="subTask">
-          {/* <label className="sr-only" htmlFor="subtask-2"></label> */}
-          <input
-            id="subtask-2"
-            type="text"
-            placeholder="e.g. Drink coffee & smile"
-            className="subTask__input"
-            value={"Doing"}
-          />
-          <button type="button" className="subTask__button">
-            <Cross />
-          </button>
-        </li>
-      </ul>
+
       <button className="overlay__button-column">+ Add New Column</button>
-      <button className="overlay__button">Create New Board</button>
+      <button
+        className="overlay__button"
+        onClick={() =>
+          addBoardWithId(boardName, {
+            name: boardName,
+          })
+        }
+      >
+        Create New Board
+      </button>
     </form>
   );
 }

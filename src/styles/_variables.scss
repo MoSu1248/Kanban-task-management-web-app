@@ -56,6 +56,7 @@
   --text-muted: var(--grey-slate-dim);
   --text-inverse: var(--primary-white);
   --text-heading: var(--primary-black);
+  --text-dim: var(--grey-slate-dim);
 
   /* Borders */
   --border-default: var(--grey-mist);
@@ -66,6 +67,8 @@
   --action-primary-hover: var(--primary-purple);
   --action-primary-muted: var(--primary-blue-dim);
   --action-secondary: var(--button-blue);
+  --action-text: var(--primary-white);
+  --action-nav-hover: var(--primary-purple);
 
   /* Danger */
   --action-danger: var(--primary-red);
@@ -77,8 +80,8 @@
 
 [data-theme="dark"] {
   /* Backgrounds */
-  --bg-app: var(--primary-black);
-  --bg-surface: var(--grey-charcoal);
+  --bg-app: var(--grey-charcoal);
+  --bg-surface: var(--grey-ink);
   --bg-surface-alt: var(--grey-steel);
   --bg-overlay: var(--primary-black-dim);
 
@@ -86,6 +89,7 @@
   --text-primary: var(--primary-white);
   --text-secondary: var(--grey-slate);
   --text-muted: var(--grey-slate-dim);
+  --text-dim: var(--primary-white);
   --text-inverse: var(--primary-black);
   --text-heading: var(--primary-white);
 
@@ -97,7 +101,9 @@
   --action-primary: var(--primary-blue);
   --action-primary-hover: var(--primary-purple);
   --action-primary-muted: var(--primary-blue-dim);
-  --action-secondary: var(--button-blue);
+  --action-secondary: var(--grey-ink);
+  --action-text: var(--primary-white);
+  --action-nav-hover: var(--primary-white);
 
   /* Danger */
   --action-danger: var(--primary-red);

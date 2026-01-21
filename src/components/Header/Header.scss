@@ -34,9 +34,9 @@
 
     .content__add-btn {
       @include btn-styling(
-        var(--bg-surface),
+        var(--action-text),
         var(--action-primary),
-        var(--action-primary-muted)
+        var(--action-primary-hover)
       );
       margin-left: auto;
     }

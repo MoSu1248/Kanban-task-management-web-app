@@ -52,6 +52,7 @@
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    color: var(--text-primary);
 
     .overlay__options {
       background: transparent;
@@ -80,6 +81,10 @@
     @include heading((body-m), var(--text-muted));
   }
 
+  .overlay__subtask-count {
+    @include heading((body-m), var(--text-dim));
+  }
+
   textarea {
     min-height: 3rem;
   }
@@ -87,6 +92,8 @@
   input,
   textarea {
     @include input-styling;
+    background-color: transparent;
+    color: var(--text-primary);
   }
 
   .subTasks {
@@ -168,6 +175,7 @@
     background-color: var(--bg-app);
     border-radius: 4px;
     cursor: pointer;
+    align-items: center;
 
     input[type="checkbox"] {
       accent-color: var(
@@ -181,9 +189,11 @@
 
     .checkbox__label {
       cursor: pointer;
-      @include heading((body-m), var(--text-muted));
+      @include heading((body-m), var(--text-dim));
 
       &.checked {
+        @include heading((body-m), var(--text-muted));
+
         text-decoration: line-through;
       }
     }

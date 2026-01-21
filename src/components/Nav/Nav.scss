@@ -24,7 +24,7 @@
 
     &:hover {
       letter-spacing: 0.07rem;
-      color: var(--action-primary);
+      color: var(--action-nav-hover);
     }
 
     &::after {
@@ -44,7 +44,7 @@
   .active {
     @include heading((m), var(--bg-surface));
     z-index: 1;
-
+    color: var(--action-text);
     &:hover {
       letter-spacing: 0rem;
     }
@@ -59,7 +59,7 @@
 
     &:hover {
       letter-spacing: 0.07rem;
-      color: var(--action-primary-hover);
+      color: var(--action-nav-hover);
     }
   }
 }

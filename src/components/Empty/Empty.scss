@@ -14,9 +14,9 @@
 
   &__btn {
     @include btn-styling(
-      var(--bg-surface),
+      var(--action-text),
       var(--action-primary),
-      var(--bg-surface)
+      var(--action-primary-hover)
     );
   }
 }

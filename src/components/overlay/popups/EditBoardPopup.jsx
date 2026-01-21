@@ -9,7 +9,9 @@ export default function EditBoardPopup({ payload }) {
 
   return (
     <form className="overlay__container">
-      <h3>Edit Board</h3>{" "}
+      <div className="overlay__header">
+        <h3>Edit Board</h3>
+      </div>
       <label className="overlay__label" htmlFor="addTitle">
         Board Name
       </label>

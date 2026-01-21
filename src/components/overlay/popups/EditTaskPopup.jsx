@@ -4,7 +4,9 @@ import Cross from "../../../assets/icon-cross.svg?react";
 export default function AddTaskPopup() {
   return (
     <form className="overlay__container">
-      <h3>Edit Task</h3>
+      <div className="overlay__header">
+        <h3>Edit Task</h3>
+      </div>
       <label className="overlay__label" htmlFor="addTitle">
         Title
       </label>

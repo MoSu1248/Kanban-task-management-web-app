@@ -20,7 +20,7 @@
     transition: 0.3s ease;
     &:hover {
       letter-spacing: 0.3rem;
-      color: var(--bg-surface);
+      color: var(--text-primary);
       background-color: var(--text-muted);
     }
   }
