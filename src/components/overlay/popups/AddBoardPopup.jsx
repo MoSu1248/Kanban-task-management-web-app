@@ -10,6 +10,8 @@ export default function AddBoardPopup() {
   const closeModal = useModalStore((state) => state.toggleModalClose);
 
   const [boardName, setBoardName] = useState();
+  const [status, setStatus] = useState([]);
+
   async function addBoardWithId(boardName, boardData) {
     try {
       const boardRef = doc(db, "Boards", boardName);
@@ -20,6 +22,17 @@ export default function AddBoardPopup() {
     } catch (error) {
       console.error("Error creating board:", error);
     }
+  }
+
+  function handleSubtaskChange(index, value) {
+    setStatus((prev) => {
+      const updated = [...prev];
+      updated[index] = {
+        ...updated[index],
+        name: value,
+      };
+      return updated;
+    });
   }
 
   return (
@@ -41,13 +54,35 @@ export default function AddBoardPopup() {
       <label className="overlay__label" htmlFor="subTasks">
         Columns
       </label>
-
-      <button className="overlay__button-column">+ Add New Column</button>
+      <ul className="subTasks">
+        {status.map((subtask, index) => (
+          <li className="subTask" key={index}>
+            <input
+              key={index}
+              type="text"
+              placeholder={`Column ${index + 1}`}
+              value={subtask.title}
+              onChange={(e) => handleSubtaskChange(index, e.target.value)}
+            />
+            <button type="button" className="subTask__button">
+              <Cross />
+            </button>
+          </li>
+        ))}
+      </ul>
+      <button
+        className="overlay__button-column"
+        onClick={() => setStatus((prev) => [...prev, { status: "" }])}
+      >
+        + Add New Column
+      </button>
       <button
         className="overlay__button"
+        type="submit"
         onClick={() =>
           addBoardWithId(boardName, {
             name: boardName,
+            columns: status,
           })
         }
       >

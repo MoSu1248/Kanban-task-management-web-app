@@ -9,9 +9,10 @@ export default function Nav() {
   const navDisplay = useNavTogglerStore((state) => state.navDisplay);
   const modalOpen = useModalStore((state) => state.toggleModalOpen);
 
-  const { boards, fetchBoards, loading , selectedBoardId , setSelectedBoardId } = userBoardStore();
+  const { boards, fetchBoards, loading, selectedBoardId, setSelectedBoardId } =
+    userBoardStore();
 
-   useEffect(() => {
+  useEffect(() => {
     fetchBoards();
   }, [fetchBoards]);
 

@@ -1,9 +1,53 @@
-import React from "react";
+import React, { use, useState } from "react";
 import Cross from "../../../assets/icon-cross.svg?react";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebase";
+import { userBoardStore } from "../../stores/useBoardStore";
+import { useModalStore } from "../../stores/useModalStore";
 
 export default function AddTaskPopup() {
+  const { selectedBoardId } = userBoardStore();
+  const [col, setCol] = useState("Todo");
+  const [title, setTitle] = useState();
+  const [desc, setDesc] = useState();
+  const [subtasks, setSubtasks] = useState([{ title: "", isCompleted: false }]);
+
+  function handleSubtaskChange(index, value) {
+    setSubtasks((prev) => {
+      const updated = [...prev];
+      updated[index] = {
+        ...updated[index],
+        title: value,
+      };
+      return updated;
+    });
+  }
+
+  const handleSubmit = async () => {
+    const newTask = {
+      title,
+      description: desc,
+      status: col,
+      subtasks,
+    };
+
+    try {
+      const boardRef = doc(db, "Boards", selectedBoardId);
+      const boardSnap = await getDoc(boardRef);
+      const boardData = boardSnap.data();
+
+      const updatedColumns = boardData.columns.map((c) =>
+        c.name === col ? { ...c, tasks: [...c.tasks, newTask] } : c,
+      );
+
+      await updateDoc(boardRef, { columns: updatedColumns });
+    } catch (error) {
+      console.error("Error adding task:", error);
+    }
+  };
+
   return (
-    <form className="overlay__container">
+    <form className="overlay__container" onSubmit={(e) => e.preventDefault()}>
       <div className="overlay__header">
         <h3>Add New Task</h3>
       </div>
@@ -16,6 +60,7 @@ export default function AddTaskPopup() {
         id="addTitle"
         placeholder="e.g. Take coffee break"
         className="overlay__input"
+        onChange={(e) => setTitle(e.target.value)}
       />
       <label className="overlay__label" htmlFor="addTitle">
         Description
@@ -27,36 +72,35 @@ export default function AddTaskPopup() {
         placeholder="e.g. It’s always good to take a break. This 15 minute break will 
         recharge the batteries a little."
         className="overlay__textarea"
+        onChange={(e) => setDesc(e.target.value)}
       />
       <label className="overlay__label" htmlFor="subTasks">
         Subtasks
       </label>
       <ul className="subTasks">
-        <li className="subTask">
-          {/* <label className="sr-only" htmlFor="subtask-1"></label> */}
-          <input
-            id="subtask-1"
-            type="text"
-            placeholder="e.g. Make coffee"
-            className="subTask__input"
-          />
-          <button type="button" className="subTask__button">
-            <Cross />
-          </button>
-        </li>
-        <li className="subTask">
-          {/* <label className="sr-only" htmlFor="subtask-2"></label> */}
-          <input
-            id="subtask-2"
-            type="text"
-            placeholder="e.g. Drink coffee & smile"
-            className="subTask__input"
-          />
-          <button type="button" className="subTask__button">
-            <Cross />
-          </button>
-        </li>
+        {subtasks.map((subtask, index) => (
+          <li className="subTask" key={index}>
+            <input
+              key={index}
+              type="text"
+              placeholder={`Subtask ${index + 1}`}
+              value={subtask.title}
+              onChange={(e) => handleSubtaskChange(index, e.target.value)}
+            />
+            <button type="button" className="subTask__button">
+              <Cross />
+            </button>
+          </li>
+        ))}
       </ul>
+      <button
+        type="overlay__button"
+        onClick={() =>
+          setSubtasks((prev) => [...prev, { title: "", isCompleted: false }])
+        }
+      >
+        + Add New Subtask
+      </button>
       <label className="overlay__label" htmlFor="status">
         Status
       </label>
@@ -66,8 +110,15 @@ export default function AddTaskPopup() {
         id="addTitle"
         placeholder="e.g. Take coffee break"
         className="overlay__input"
+        onChange={(e) => setCol(e.target.value)}
       />
-      <button className="overlay__button">Create Task</button>
+      <button
+        className="overlay__button"
+        type="submit"
+        onClick={() => handleSubmit()}
+      >
+        Create Task
+      </button>
     </form>
   );
 }
