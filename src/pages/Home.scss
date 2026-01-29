@@ -20,6 +20,7 @@
     transition: 0.3s ease;
     &:hover {
       letter-spacing: 0.3rem;
+      transform: scale(1.03);
       color: var(--text-primary);
       background-color: var(--text-muted);
     }

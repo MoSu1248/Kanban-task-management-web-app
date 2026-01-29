@@ -4,32 +4,65 @@ import Elipsis from "../../../assets/icon-vertical-ellipsis.svg?react";
 import { useModalStore } from "../../stores/useModalStore";
 import { useOverlayOptionsStore } from "../../stores/useOverlayOptionsStore";
 import OverlayOptions from "../../overlayOptions/OverlayOptions";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from "../../../firebase/firebase";
+import { userBoardStore } from "../../stores/useBoardStore";
 
 export default function ViewTaskPopup({ payload }) {
   const { columnId, task } = payload;
   const [taskState, setTaskState] = useState(task);
+  const { selectedBoardId } = userBoardStore();
 
   const { overlayOptionsState } = useOverlayOptionsStore();
   const toggleOptions = useOverlayOptionsStore((state) => state.toggleOptions);
 
-  function toggleSubtask(index) {
-    setTaskState((prev) => {
-      const updated = [...prev.subtasks];
-      updated[index] = {
-        ...updated[index],
-        isCompleted: !updated[index].isCompleted,
-      };
-
-      return {
-        ...prev,
-        subtasks: updated,
-      };
-    });
-  }
-
   const completedCount =
     taskState.subtasks?.filter((st) => st.isCompleted).length || 0;
+
   const totalCount = taskState.subtasks?.length || 0;
+
+  const toggleSubtask = async (subtaskIndex) => {
+    try {
+      const boardRef = doc(db, "Boards", selectedBoardId);
+      const boardSnap = await getDoc(boardRef);
+      const boardData = boardSnap.data();
+
+      const updatedColumns = boardData.columns.map((column) => {
+        if (column.name === columnId) {
+          const updatedTasks = column.tasks.map((task) => {
+            if (task.title === taskState.title) {
+              const updatedSubtasks = task.subtasks.map((subtask, i) => {
+                if (i === subtaskIndex) {
+                  return { ...subtask, isCompleted: !subtask.isCompleted };
+                }
+                return subtask;
+              });
+
+              return { ...task, subtasks: updatedSubtasks };
+            }
+            return task;
+          });
+
+          return { ...column, tasks: updatedTasks };
+        }
+        return column;
+      });
+
+      await updateDoc(boardRef, { columns: updatedColumns });
+
+      setTaskState((prev) => {
+        const updated = [...prev.subtasks];
+        updated[subtaskIndex] = {
+          ...updated[subtaskIndex],
+          isCompleted: !updated[subtaskIndex].isCompleted,
+        };
+        return { ...prev, subtasks: updated };
+      });
+    } catch (error) {
+      console.error("Error toggling subtask:", error);
+    }
+  };
+
   return (
     <form className="overlay__container" onSubmit={(e) => e.preventDefault()}>
       <div className="overlay__header">
@@ -50,7 +83,7 @@ export default function ViewTaskPopup({ payload }) {
         ( {completedCount} of {totalCount} subtasks completed )
       </label>
       <div className="checkbox__wrapper">
-        {taskState.subtasks.map((subtask, index) => (
+        {taskState?.subtasks?.map((subtask, index) => (
           <div
             className="checkbox__container"
             key={index}
@@ -58,14 +91,15 @@ export default function ViewTaskPopup({ payload }) {
           >
             <input
               type="checkbox"
-              id="terms"
+              id={`subtask-${index}`}
+              htmlFor={`subtask-${index}`}
               name="terms"
               value="accepted"
               onChange={() => toggleSubtask(index)}
               checked={subtask.isCompleted}
             />
             <label
-              htmlFor="terms"
+              htmlFor={`subtask-${index}`}
               className={
                 !subtask.isCompleted
                   ? "checkbox__label"

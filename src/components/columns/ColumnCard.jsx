@@ -13,7 +13,6 @@ export default function ColumnCard({
     <li
       onClick={() =>
         modalOpen("VIEW__TASK", {
-          // boardId: board.name,
           columnId: column,
           task: task,
         })

@@ -4,13 +4,17 @@ import { doc, updateDoc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/firebase";
 import { userBoardStore } from "../../stores/useBoardStore";
 import { useModalStore } from "../../stores/useModalStore";
+import ChevDown from "../../../assets/icon-chevron-down.svg?react";
+import ChevUp from "../../../assets/icon-chevron-up.svg?react";
 
 export default function AddTaskPopup() {
-  const { selectedBoardId } = userBoardStore();
+  const { selectedBoardId, boards } = userBoardStore();
   const [col, setCol] = useState();
   const [title, setTitle] = useState();
   const [desc, setDesc] = useState();
   const [subtasks, setSubtasks] = useState([{ title: "", isCompleted: false }]);
+  const dataList = boards.find((b) => b.name === selectedBoardId);
+  const closeModal = useModalStore((state) => state.toggleModalClose);
 
   function handleSubtaskChange(index, value) {
     setSubtasks((prev) => {
@@ -23,7 +27,7 @@ export default function AddTaskPopup() {
     });
   }
 
-const handleSubmit = async () => {
+  const handleSubmit = async () => {
     const newTask = {
       title,
       description: desc,
@@ -41,10 +45,12 @@ const handleSubmit = async () => {
       );
 
       await updateDoc(boardRef, { columns: updatedColumns });
+      closeModal();
     } catch (error) {
       console.error("Error adding task:", error);
     }
-};
+  };
+  const [dropDownState, setDropDownState] = useState(false);
 
   return (
     <form className="overlay__container" onSubmit={(e) => e.preventDefault()}>
@@ -78,7 +84,7 @@ const handleSubmit = async () => {
         Subtasks
       </label>
       <ul className="subTasks">
-        {subtasks.map((subtask, index) => (
+        {subtasks?.map((subtask, index) => (
           <li className="subTask" key={index}>
             <input
               key={index}
@@ -86,6 +92,7 @@ const handleSubmit = async () => {
               placeholder={`Subtask ${index + 1}`}
               value={subtask.title}
               onChange={(e) => handleSubtaskChange(index, e.target.value)}
+              className="subTask__input"
             />
             <button type="button" className="subTask__button">
               <Cross />
@@ -105,14 +112,28 @@ const handleSubmit = async () => {
       <label className="overlay__label" htmlFor="status">
         Status
       </label>
-      <input
-        type="text"
-        name="addTitle"
-        id="addTitle"
-        placeholder="e.g. Take coffee break"
-        className="overlay__input"
-        onChange={(e) => setCol(e.target.value)}
-      />
+      <div class="dropdown" id="status">
+        <button
+          class="dropbtn"
+          onClick={() => setDropDownState(!dropDownState)}
+        >
+          {col || "-"}
+          {dropDownState == false ? <ChevDown /> : <ChevUp />}
+        </button>
+        {dropDownState && (
+          <div class="dropdown-content">
+            {dataList?.columns?.map((column, index) => (
+              <button
+                key={index}
+                onClick={() => setCol(column.name)}
+                className="drop__option"
+              >
+                {column.name}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
       <button
         className="overlay__button"
         type="submit"

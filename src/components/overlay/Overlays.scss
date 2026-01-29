@@ -71,7 +71,7 @@
   max-width: 450px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 
   .overlay__input {
     height: 2.5rem;
@@ -183,6 +183,10 @@
     cursor: pointer;
     align-items: center;
 
+    &:hover {
+      background-color: var(--action-primary-muted);
+    }
+
     input[type="checkbox"] {
       accent-color: var(
         --action-primary
@@ -201,6 +205,54 @@
         @include heading((body-m), var(--text-muted));
 
         text-decoration: line-through;
+      }
+    }
+  }
+}
+
+.dropdown {
+  width: 100%;
+  position: relative;
+  .dropbtn {
+    @include input-styling;
+    background-color: transparent;
+    color: var(--text-primary);
+    width: 100%;
+    text-align: left;
+    font-family: var(--primary-font);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: start;
+    background-color: var(--bg-surface);
+    padding: 1rem 0;
+    border-radius: 8px;
+    margin-top: 1rem;
+    box-shadow:
+      rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+    .drop__option {
+      padding: 0.8rem;
+      text-align: left;
+      background-color: transparent;
+      color: var(--text-secondary);
+      font-family: var(--primary-font);
+      cursor: pointer;
+      border: none;
+      transition: 0.3s ease;
+      &:hover {
+        transform: scale(1.01);
+        color: var(--action-primary-hover);
       }
     }
   }
